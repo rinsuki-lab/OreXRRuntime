@@ -347,14 +347,15 @@ let orexrEnumerateSwapchainFormats: PFN_xrEnumerateSwapchainFormats = { (session
     guard let capOut else {
         return XR_ERROR_VALIDATION_FAILURE
     }
-    capOut.pointee = 1
+    capOut.pointee = 2
     if capIn == 0 {
         return XR_SUCCESS
     }
     guard let formats else {
         return XR_ERROR_VALIDATION_FAILURE
     }
-    formats.pointee = .init(MTLPixelFormat.rgba8Unorm.rawValue)
+    formats[0] = .init(MTLPixelFormat.rgba8Unorm.rawValue)
+    formats[1] = .init(MTLPixelFormat.rgba8Unorm_srgb.rawValue)
     return XR_SUCCESS
 }
 
