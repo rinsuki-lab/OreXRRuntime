@@ -452,9 +452,9 @@ let orexrLocateViews: PFN_xrLocateViews = { session, locateInfo, state, capInput
     
     capOutput.pointee = 2
     
-    for i in 0..<1 {
-        views[i].fov = .init(angleLeft: 0.1, angleRight: 0.1, angleUp: 0.1, angleDown: 0.1)
-        views[i].pose = .init(orientation: .init(x: 0, y: 0, z: 0, w: 0), position: .init(x: i == 0 ? -1 : 1, y: 1, z: 0))
+    for i in 0..<2 {
+        views[i].fov = .init(angleLeft: -0.5, angleRight: 0.5, angleUp: -0.5, angleDown: 0.5)
+        views[i].pose = .init(orientation: .init(x: 0, y: 0, z: 0, w: 0), position: .init(x: 0, y: 1, z: 0.1))
     }
     state.pointee.viewStateFlags = XR_VIEW_STATE_POSITION_VALID_BIT | XR_VIEW_STATE_ORIENTATION_VALID_BIT
     
@@ -466,7 +466,7 @@ let orexrLocateSpace: PFN_xrLocateSpace = { space, baseSpace, time, location in
         return XR_ERROR_VALIDATION_FAILURE
     }
     location.pointee.locationFlags = XR_SPACE_LOCATION_POSITION_VALID_BIT | XR_SPACE_LOCATION_ORIENTATION_VALID_BIT
-    location.pointee.pose = .init(orientation: .init(x: 0, y: 0, z: 0, w: 0), position: .init(x: 0, y: 0, z: 0))
+    location.pointee.pose = .init(orientation: .init(x: 0, y: 0, z: 0, w: 0), position: .init(x: 0, y: 1, z: 0))
     return XR_SUCCESS
 }
 
