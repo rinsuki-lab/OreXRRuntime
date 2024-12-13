@@ -112,6 +112,36 @@ func orexrGetInstanceProcAddr(instance: XrInstance?, name: ConstCharPtr, fn: Uns
     case "xrReleaseSwapchainImage":
         fn.pointee = unsafeBitCast(orexrReleaseSwapchainImage, to: PFN_xrVoidFunction.self)
         return XR_SUCCESS
+    case "xrCreateActionSet":
+        fn.pointee = unsafeBitCast(orexrCreateActionSet, to: PFN_xrVoidFunction.self)
+        return XR_SUCCESS
+    case "xrCreateAction":
+        fn.pointee = unsafeBitCast(orexrCreateAction, to: PFN_xrVoidFunction.self)
+        return XR_SUCCESS
+    case "xrStringToPath":
+        fn.pointee = unsafeBitCast(orexrStringToPath, to: PFN_xrVoidFunction.self)
+        return XR_SUCCESS
+    case "xrSuggestInteractionProfileBindings":
+        fn.pointee = unsafeBitCast(orexrSuggestInteractionProfileBindings, to: PFN_xrVoidFunction.self)
+        return XR_SUCCESS
+    case "xrCreateActionSpace":
+        fn.pointee = unsafeBitCast(orexrCreateActionSpace, to: PFN_xrVoidFunction.self)
+        return XR_SUCCESS
+    case "xrAttachSessionActionSets":
+        fn.pointee = unsafeBitCast(orexrAttachSessionActionSets, to: PFN_xrVoidFunction.self)
+        return XR_SUCCESS
+    case "xrSyncActions":
+        fn.pointee = unsafeBitCast(orexrSyncActions, to: PFN_xrVoidFunction.self)
+        return XR_SUCCESS
+    case "xrGetActionStateFloat":
+        fn.pointee = unsafeBitCast(orexrGetActionStateFloat, to: PFN_xrVoidFunction.self)
+        return XR_SUCCESS
+    case "xrGetActionStatePose":
+        fn.pointee = unsafeBitCast(orexrGetActionStatePose, to: PFN_xrVoidFunction.self)
+        return XR_SUCCESS
+    case "xrGetActionStateBoolean":
+        fn.pointee = unsafeBitCast(orexrGetActionStateBoolean, to: PFN_xrVoidFunction.self)
+        return XR_SUCCESS
     default:
         log.warning("UNKNOWN function requested, \(name)")
         fn.pointee = nil
@@ -482,6 +512,54 @@ let orexrWaitSwapchainImage: PFN_xrWaitSwapchainImage = { swapchain, waitInfo in
 }
 
 let orexrReleaseSwapchainImage: PFN_xrReleaseSwapchainImage = { swapchain, releaseInfo in
+    return XR_SUCCESS
+}
+
+let orexrCreateActionSet: PFN_xrCreateActionSet = { instance, createInfo, actionSet in
+    return XR_SUCCESS
+}
+
+let orexrCreateAction: PFN_xrCreateAction = { actionSet, createInfo, action in
+    return XR_SUCCESS
+}
+
+let orexrStringToPath: PFN_xrStringToPath = { instance, pathString, path in
+    guard let pathString else {
+        return XR_ERROR_VALIDATION_FAILURE
+    }
+    guard let path else {
+        return XR_ERROR_VALIDATION_FAILURE
+    }
+    log.info("orexrStringToPath: \(String(cString: pathString))")
+    path.pointee = .init(XR_NULL_PATH)
+    return XR_SUCCESS
+}
+
+let orexrSuggestInteractionProfileBindings: PFN_xrSuggestInteractionProfileBindings = { instance, suggested in
+    return XR_SUCCESS
+}
+
+let orexrCreateActionSpace: PFN_xrCreateActionSpace = { action, createInfo, space in
+    return XR_SUCCESS
+}
+
+let orexrAttachSessionActionSets: PFN_xrAttachSessionActionSets = { session, attachInfo in
+    return XR_SUCCESS
+}
+
+let orexrSyncActions: PFN_xrSyncActions = { session, syncInfo in
+    return XR_SUCCESS
+}
+
+let orexrGetActionStateFloat: PFN_xrGetActionStateFloat = { session, getInfo, state in
+    return XR_SUCCESS
+}
+
+let orexrGetActionStatePose: PFN_xrGetActionStatePose = { session, getInfo, state in
+    return XR_SUCCESS
+}
+
+let orexrGetActionStateBoolean: PFN_xrGetActionStateBoolean = { session, getInfo, state in
     return XR_SUCCESS
 }
 
