@@ -61,7 +61,7 @@ func orexrGetInstanceProcAddr(instance: XrInstance?, name: ConstCharPtr, fn: Uns
     case "xrEnumerateViewConfigurationViews":
         fn.pointee = unsafeBitCast(orexrEnumerateViewConfigurationViews, to: PFN_xrVoidFunction.self)
         return XR_SUCCESS
-    case "xrGetMetalGraphicsRequirementsKHR":
+    case "xrGetMetalGraphicsRequirementsKHR", "xrGetMetalGraphicsRequirementsKHRX2":
         fn.pointee = unsafeBitCast(orexrGetMetalGraphicsRequirementsKHR, to: PFN_xrVoidFunction.self)
         return XR_SUCCESS
     case "xrCreateSession":
@@ -125,7 +125,7 @@ let orexrEnumerateInstanceExtensionProperties: PFN_xrEnumerateInstanceExtensionP
         return XR_ERROR_VALIDATION_FAILURE
     }
 
-    capOut.pointee = 1
+    capOut.pointee = 2
     if capIn == 0 { // requests length
         return XR_SUCCESS
     }
@@ -134,8 +134,9 @@ let orexrEnumerateInstanceExtensionProperties: PFN_xrEnumerateInstanceExtensionP
         return XR_ERROR_VALIDATION_FAILURE
     }
     
-    properties.pointee = .init(type: XR_TYPE_EXTENSION_PROPERTIES, next: nil, extensionName: OREXR_EXTNAME_XR_KHR_metal_enable, extensionVersion: 1)
-    
+    properties[0] = .init(type: XR_TYPE_EXTENSION_PROPERTIES, next: nil, extensionName: OREXR_EXTNAME_XR_KHR_metal_enable, extensionVersion: 1)
+    properties[1] = .init(type: XR_TYPE_EXTENSION_PROPERTIES, next: nil, extensionName: OREXR_EXTNAME_XR_KHRX2_metal_enable, extensionVersion: 1)
+
     return XR_SUCCESS
 }
 

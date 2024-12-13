@@ -10,5 +10,7 @@
 
 // TODO: we should NOT write these in header file
 const char OREXR_EXTNAME_XR_KHR_metal_enable[XR_MAX_EXTENSION_NAME_SIZE] = XR_KHR_METAL_ENABLE_EXTENSION_NAME;
+// ???????????
+const char OREXR_EXTNAME_XR_KHRX2_metal_enable[XR_MAX_EXTENSION_NAME_SIZE] = "XR_KHRX2_metal_enable";
 const char OREXR_SYSTEM_NAME[XR_MAX_SYSTEM_NAME_SIZE] = "OreXR System";
 const char OREXR_RUNTIME_NAME[XR_MAX_RUNTIME_NAME_SIZE] = "OreXR Runtime";
